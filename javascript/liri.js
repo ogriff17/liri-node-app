@@ -48,7 +48,8 @@ function spotifyThis(song){
 
     var  defaultArtist = "RKCB";
    function concertThis(artist){
-       var queryUrl = "https://rest.bandsintown.com/artists/" + decodeURI(artist) + "/events?app_id=codingbootcamp";
+     /*   var queryUrl = "https://rest.bandsintown.com/artists/" + decodeURI(artist) + "/events?app_id=codingbootcamp"; */
+       var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
    
         axios.get(queryUrl).then(
         function(response)
