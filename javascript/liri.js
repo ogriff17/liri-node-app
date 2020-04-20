@@ -15,12 +15,15 @@ function processCommands(inputCommand, commandParam){
         case 'spotify-this-song':
             spotifyThis(commandParam)
             break;
-            case 'concert-this':
-                concertThis(commandParam)
-                break;
-                
-            default:
-                console.log("Invalid Command." + inputCommand);
+        case 'concert-this':
+            concertThis(commandParam)
+            break;
+        case 'movie-this':
+            //console.log ("Here I am--once again!")
+            movieThis(commandParam) 
+            break; 
+        default:
+            console.log("Invalid Command." + inputCommand);
     }
 } 
 
@@ -48,7 +51,6 @@ function spotifyThis(song){
 
     var  defaultArtist = "RKCB";
    function concertThis(artist){
-     /*   var queryUrl = "https://rest.bandsintown.com/artists/" + decodeURI(artist) + "/events?app_id=codingbootcamp"; */
        var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
    
         axios.get(queryUrl).then(
@@ -68,11 +70,47 @@ function spotifyThis(song){
     })
     .catch(function(error){
         console.log(error);
-    });
-
-
-
+    })
    }
 
+
+var defaultMovie="Titanic";
+function movieThis(movies){
+    if (movies=== undefined){
+    movies = defaultMovie;
+    }
+    axios.get("http://www.omdbapi.com/?t=" + movies + "&plot=short&apikey=trilogy")
+
+    .then(function(response){
+        console.log("Title:" + response.data.Title);
+        console.log("Year Released: " + response.data.Year);
+        console.log("IMDB rating: " + response.data.imdbRating);
+        if(response.data.Ratings[0].Value === undefined){
+            console.log("Rotten Tomatoes Rating: None");
+        } else {
+        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0].Value);}
+        console.log("Country/Countries Produced: " + response.data.Country);
+        console.log("Language: " + response.data.Language);
+        console.log("Plot: " + response. data.Plot);
+        console.log("Cast: " + response.data.Actors);
+    })
+
+    .catch(function(error){
+        console.log(error);
+    })
+
+
+}
+
+
+
+
+
+
+
+
+
+
+    
 
 processCommands(inputCommand, commandParam);
