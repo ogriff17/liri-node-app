@@ -74,7 +74,7 @@ function spotifyThis(song){
    }
 
 
-var defaultMovie="Titanic";
+var defaultMovie="Mr. Nobody";
 function movieThis(movies){
     if (movies=== undefined){
     movies = defaultMovie;
@@ -85,10 +85,13 @@ function movieThis(movies){
         console.log("Title:" + response.data.Title);
         console.log("Year Released: " + response.data.Year);
         console.log("IMDB rating: " + response.data.imdbRating);
-        if(response.data.Ratings[0].Value === undefined){
-            console.log("Rotten Tomatoes Rating: None");
-        } else {
-        console.log("Rotten Tomatoes Rating: " + response.data.Ratings[0].Value);}
+       
+        for(j=0; j < response.data.Ratings.length; j++){
+            if(response.data.Ratings[j].Source === "Rotten Tomatoes"){
+               console.log("Rotten Tomatoes Rating: " + response.data.Ratings[j].Value); }
+        }
+
+
         console.log("Country/Countries Produced: " + response.data.Country);
         console.log("Language: " + response.data.Language);
         console.log("Plot: " + response. data.Plot);
